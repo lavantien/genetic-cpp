@@ -1,4 +1,5 @@
 // Tested with Visual Studio 2019 - version 16.4.0
+// Set to Release - x64 when work with large number
 #include <iostream>
 #include <vector>
 #include <random>
@@ -6,18 +7,18 @@
 #include <fstream>
 #include <string>
 #include <cmath>
-using namespace std;
 #include <chrono>
+using namespace std;
 
 // constants
 
-static const double LOCATION_RANGE = 1000.0;	// Map size in km
+static const double LOCATION_RANGE = 1000.0; // Map size in km
 static const int POPULATION_SIZE = 1000;
-static const int DNA_SIZE = 30;								// Number of cities, a city is defined by its id and its location (x, y)
-static const int GENERATION_COUNT = 10000;		// Number of evolution loops
+static const int DNA_SIZE = 30; // Number of cities, a city is defined by its id and its location (x, y)
+static const int GENERATION_COUNT = 10000; // Number of evolution loops
 static const double MUTATION_CHANCE = 0.05;
-static const double SELECTION_SIZE = 0.6;			// Select 60% top individuals each loop
-static const double CROSSOVER_POINT = 0.5;		// Child inherit 50% of father genes and 50% of mother genes
+static const double SELECTION_SIZE = 0.6; // Select 60% top individuals each loop
+static const double CROSSOVER_POINT = 0.5; // Child inherit 50% of father genes and 50% of mother genes
 
 // class prototypes
 
@@ -75,7 +76,7 @@ void calcAvgFitness();
 // main function
 
 int main() {
-	auto started = std::chrono::high_resolution_clock::now();
+	auto started = chrono::high_resolution_clock::now();
 
 	initPopulation(POPULATION_SIZE, DNA_SIZE);
 	out << "Input (original individual):" << endl;
@@ -94,12 +95,13 @@ int main() {
 	populationSort();
 	printIndividualWithBestFitness(GENERATION_COUNT);
 	out << "Mutation occurs " << mutationCount << " times" << endl;
+
+	auto done = chrono::high_resolution_clock::now();
+
+	out << "Done!\nExecution time: " << chrono::duration_cast<std::chrono::seconds>(done - started).count() << "s" << endl;
+	cout << "Done!\nExecution time: " << chrono::duration_cast<std::chrono::seconds>(done - started).count() << "s" << endl;
+	
 	out.close();
-
-	auto done = std::chrono::high_resolution_clock::now();
-
-	cout << "Done!\nExecution time: " << std::chrono::duration_cast<std::chrono::seconds>(done - started).count() << "s" << endl;
-	out << "Done!\nExecution time: " << std::chrono::duration_cast<std::chrono::seconds>(done - started).count() << "s" << endl;
 	return 0;
 }
 
