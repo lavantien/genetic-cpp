@@ -6,8 +6,8 @@
 #include <algorithm>
 #include <fstream>
 #include <string>
-#include <cmath>
 #include <chrono>
+#include <cmath>
 using namespace std;
 
 // constants
