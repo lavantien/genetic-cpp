@@ -98,8 +98,8 @@ int main() {
 
 	auto done = chrono::high_resolution_clock::now();
 
-	out << "Done!\nExecution time: " << chrono::duration_cast<std::chrono::seconds>(done - started).count() << "s" << endl;
-	cout << "Done!\nExecution time: " << chrono::duration_cast<std::chrono::seconds>(done - started).count() << "s" << endl;
+	out << "Done!\nExecution time: " << chrono::duration_cast<chrono::seconds>(done - started).count() << "s" << endl;
+	cout << "Done!\nExecution time: " << chrono::duration_cast<chrono::seconds>(done - started).count() << "s" << endl;
 	
 	out.close();
 	return 0;
