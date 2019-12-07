@@ -14,7 +14,7 @@ using namespace std;
 
 static const double LOCATION_RANGE = 1000.0; // Map size in km
 static const int POPULATION_SIZE = 1000;
-static const int DNA_SIZE = 30; // Number of cities, a city is defined by its id and its location (x, y)
+static const int DNA_SIZE = 100; // Number of cities, a city is defined by its id and its location (x, y)
 static const int GENERATION_COUNT = 10000; // Number of evolution loops
 static const double MUTATION_CHANCE = 0.05;
 static const double SELECTION_SIZE = 0.6; // Select 60% top individuals each loop
@@ -76,6 +76,8 @@ void calcAvgFitness();
 // main function
 
 int main() {
+	cout << "Running..." << endl;
+
 	auto started = chrono::high_resolution_clock::now();
 
 	initPopulation(POPULATION_SIZE, DNA_SIZE);
@@ -201,8 +203,7 @@ void selection() {
 }
 
 void printIndividualWithBestFitness(const int generation) {
-	out << "\nGeneration " << generation << " with " << POPULATION_SIZE << " individuals. Average fitness: " << avgFitness << endl;
-	out << "-> Current best fitness:";
+	out << "\nGeneration " << generation << " with " << POPULATION_SIZE << " individuals. Average fitness: " << avgFitness << " -> Current best fitness:\n";
 	out << population[0].toString() << endl;
 }
 
@@ -212,7 +213,7 @@ void crossover() {
 	for (int i = 0; i < selectionSize / 2; ++i) {
 		auto father = population[i].getDNA();
 		auto mother = population[population.size() - 1 - i].getDNA();
-		vector<Gene> child{father.begin(), father.begin() + (int)(father.size() * CROSSOVER_POINT)};
+		vector<Gene> child {father.begin(), father.begin() + (int)(father.size() * CROSSOVER_POINT)};
 		for (auto geneOfMother : mother) {
 			if (find_if(child.begin(), child.end(),
 				[&](const Gene& gene) -> bool {
