@@ -1,4 +1,4 @@
-// Tested with Visual Studio 2019 - version 16.4.0 and gcc-13
+// gcc-13
 //
 #include <algorithm>
 #include <chrono>
@@ -17,7 +17,7 @@ static const int POPULATION_SIZE = 10000;
 static const int DNA_SIZE = 200; // Number of cities, a city is defined by its
                                  // id and its location (x, y)
 static const int GENERATION_COUNT = 10000; // Number of evolution loops
-static const double MUTATION_CHANCE = 0.001;
+static const double MUTATION_CHANCE = 0.01;
 static const double SELECTION_SIZE =
     0.666667; // Select ~2/3 top individuals each loop
 static const double CROSSOVER_POINT =
